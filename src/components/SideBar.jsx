@@ -7,15 +7,6 @@ const SideBar = ({ isOpen }) => {
   const [category, setCategory] = useState({ a: 1 });
   const [selectedCat, setSelectedCat] = useState({});
 
-  // useEffect(() => {
-  //   console.log(
-  //     [...Object.values(selectedCat)].reduce((acc, cv) => {
-  //       acc[cv.Value] = cv.Label;
-  //       return acc;
-  //     }, {})
-  //   );
-  // }, [selectedCat]);
-
   useEffect(() => {
     if (isOpen) {
       sideBar.current.style.transform = 'scaleX(1)';
@@ -64,6 +55,31 @@ const SideBar = ({ isOpen }) => {
     const output = { segment_name: segmentName, schema: schema };
 
     console.log(JSON.stringify(output));
+
+    const webhookUrl =
+      'https://webhook.site/66ff47b5-12ec-4e88-b15d-fb9a314df431';
+    //https://corsproxy.io/?
+
+    fetch(webhookUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(output)
+    })
+      .then(response => response.text())
+      .then(data => {
+        console.log('Data sent successfully:', data);
+      })
+      .catch(error => {
+        console.error('Error sending data:', error);
+      });
+  };
+
+  const handleCancel = () => {
+    setName('');
+    setCategory({ a: 1 });
+    setSelectedCat({});
   };
 
   return (
@@ -110,7 +126,7 @@ const SideBar = ({ isOpen }) => {
         <button className="save" onClick={sendData}>
           Save the Segment
         </button>
-        <button>Cancel</button>
+        <button onClick={handleCancel}>Cancel</button>
       </div>
     </section>
   );

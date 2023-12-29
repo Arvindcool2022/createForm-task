@@ -7,6 +7,10 @@ body {
   overflow-x: hidden;
 }
 
+button {
+  user-select: none;
+}
+
 .circle {
   height: 1em;
   width: 1em;
@@ -95,6 +99,7 @@ main {
           display: flex;
           margin-inline-start: auto;
           gap: 1rem;
+          font-size: 0.85rem;
           .trait {
             display: flex;
             gap: 0.5rem;

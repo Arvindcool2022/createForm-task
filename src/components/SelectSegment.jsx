@@ -3,6 +3,7 @@ import { SEGMENT_OPTIONS } from '../utils/contant';
 
 const SelectSegment = ({ id, handleDelete, selectedCat, setSelectedCat }) => {
   const [circleColor, setCircleColor] = useState('');
+
   const disabledCat = (obj => {
     const newCategory = { ...obj };
     delete newCategory[id];
@@ -11,8 +12,6 @@ const SelectSegment = ({ id, handleDelete, selectedCat, setSelectedCat }) => {
       acc.push(cv.id);
       return acc;
     }, []);
-
-    // console.log(id, array);
   })(selectedCat);
 
   return (
